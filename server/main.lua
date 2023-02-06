@@ -7,6 +7,6 @@ RegisterNetEvent('lucky-clues:CluePrice', function()
     if Player.PlayerData.money.bank >= Price then
         Player.Functions.RemoveMoney('bank', Price, 'Suspicious Payment')
     else
-		TriggerClientEvent('QBCore:Notify', src, 'You are poor, leave!', 'error')
+	TriggerClientEvent('QBCore:Notify', src, 'You are poor, leave!', 'error')
     end
 end)

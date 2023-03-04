@@ -1,12 +1,14 @@
 QBCore = exports['qb-core']:GetCoreObject()
 
-RegisterNetEvent('lucky-clues:CluePrice', function()
-	local src = source
+QBCore.Functions.CreateCallback('lucky-clues:CluePrice',function(source, cb)
+    local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local Price = Config.InfoCost
     if Player.PlayerData.money.bank >= Price then
-        Player.Functions.RemoveMoney('bank', Price, 'Suspicious Payment')
+        Player.Functions.RemoveMoney('Bank', Price, 'Suspicious Payment')
+        cb(true)
     else
-		TriggerClientEvent('QBCore:Notify', src, 'You are poor, leave!', 'error')
+        cb(false)
+        TriggerClientEvent('QBCore:Notify', src, 'You are poor, leave!', 'error')    
     end
 end)

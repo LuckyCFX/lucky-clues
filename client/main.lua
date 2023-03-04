@@ -35,12 +35,21 @@ RegisterNetEvent('lucky-clues:ClueMenu', function (ClueMenu)
                 event = 'lucky-clues:CocInfo',
             }
         },
+        {
+            header = Config.HeroinHeader,
+            txt = Config.HeroinTxt,
+            icon = Config.HeroinIcon,
+		    message = Config.HeroinMenuMessage,
+            params = {
+                event = 'lucky-clues:CocInfo',
+            }
+        },
     })
 end)
 
 RegisterNetEvent('lucky-clues:WeedInfo', function()
     TriggerServerEvent('lucky-clues:CluePrice')
-    SetTimeout(math.random(200000, 300000), function()
+    SetTimeout(Config.WaitTime, function()
         TriggerServerEvent('qb-phone:server:sendNewMail', {
             sender = Config.WeedSender,
             subject = Config.WeedSubject,
@@ -52,7 +61,7 @@ end)
 
 RegisterNetEvent('lucky-clues:MethInfo', function()
     TriggerServerEvent('lucky-clues:CluePrice')
-    SetTimeout(math.random(200000, 300000), function()
+    SetTimeout(Config.WaitTime, function()
         TriggerServerEvent('qb-phone:server:sendNewMail', {
             sender = Config.MethSender,
             subject = Config.MethSubject,
@@ -64,11 +73,23 @@ end)
 
 RegisterNetEvent('lucky-clues:CocInfo', function()
     TriggerServerEvent('lucky-clues:CluePrice')
-    SetTimeout(math.random(200000, 300000), function()
+    SetTimeout(Config.WaitTime, function()
         TriggerServerEvent('qb-phone:server:sendNewMail', {
             sender = Config.CocSender,
             subject = Config.CocSubject,
             message = Config.CocMessage,
+            button = {}
+        })
+    end)
+end)
+
+RegisterNetEvent('lucky-clues:HeroinInfo', function()
+    TriggerServerEvent('lucky-clues:CluePrice')
+    SetTimeout(Config.WaitTime, function()
+        TriggerServerEvent('qb-phone:server:sendNewMail', {
+            sender = Config.HeroinSender,
+            subject = Config.HeroinSubject,
+            message = Config.HeroinMessage,
             button = {}
         })
     end)
@@ -82,15 +103,18 @@ CreateThread(function()
         FreezeEntityPosition(Ped, true)
         SetEntityInvincible(Ped, true)
         SetBlockingOfNonTemporaryEvents(Ped, true)
-
         exports['qb-target']:AddTargetEntity(Ped, {
             options = {
                 {
                     icon = Config.ClueIcon,
                     label = Config.ClueLabel,
                     action = function ()
-                        TriggerEvent('lucky-clues:ClueMenu')
-                    end,
+                        QBCore.Functions.TriggerCallback('lucky-clues:CluePrice',function(paid)
+                        if paid then
+                            TriggerEvent('lucky-clues:ClueMenu')
+                        end
+                    end)
+                end,
                 },
             },
             distance = 2.0

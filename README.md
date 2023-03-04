@@ -5,9 +5,9 @@
 ### if you did change the locations make sure to change the hints the config file.
 
 ## How to install
-### Drag and drop the script to your server
-### ensure lucky-clues in your server.cfg
-### and enjoy!
+### 1. Drag and drop the script to your server
+### 2. ensure lucky-clues in your server.cfg
+### 3. and enjoy!
 
 ## For support join the discord
 ## https://discord.gg/Jw69Xk4vyF

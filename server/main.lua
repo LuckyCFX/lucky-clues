@@ -9,6 +9,6 @@ QBCore.Functions.CreateCallback('lucky-clues:CluePrice',function(source, cb)
         cb(true)
     else
         cb(false)
-	      TriggerClientEvent('QBCore:Notify', src, 'You are poor, leave!', 'error')
+        TriggerClientEvent('QBCore:Notify', src, 'You are poor, leave!', 'error')    
     end
 end)
